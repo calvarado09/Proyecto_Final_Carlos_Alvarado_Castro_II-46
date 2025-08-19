@@ -146,6 +146,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="RegistrodeDoctores.aspx" />
     <Content Include="RegistrodePacientes.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -223,6 +224,7 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Data\DatabaseHelper.vb" />
+    <Compile Include="Data\DoctorRepository.vb" />
     <Compile Include="Data\PacienteRepository.vb" />
     <Compile Include="Default.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
@@ -237,6 +239,7 @@
     <Compile Include="Models\Cita.vb" />
     <Compile Include="Models\Doctor.vb" />
     <Compile Include="Models\Paciente.vb" />
+    <Compile Include="Models\Persona.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -255,6 +258,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="RegistrodeDoctores.aspx.designer.vb">
+      <DependentUpon>RegistrodeDoctores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrodeDoctores.aspx.vb">
+      <DependentUpon>RegistrodeDoctores.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="RegistrodePacientes.aspx.designer.vb">
       <DependentUpon>RegistrodePacientes.aspx</DependentUpon>
