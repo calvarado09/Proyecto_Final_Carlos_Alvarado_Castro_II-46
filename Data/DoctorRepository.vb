@@ -78,6 +78,24 @@ Public Class DoctorRepository
     End Function
 
 
+    ' Metodo para obtener un doctor por ID
+    Public Function ReadDoctorById(doctorID As Integer) As DataTable
+        Dim helper As New DatabaseHelper()
+        Try
+            Dim query As String = "SELECT * FROM Doctores WHERE DoctorID = @DoctorID"
+            Dim parameters As New List(Of SqlParameter) From {
+            New SqlParameter("@DoctorID", doctorID)
+        }
+            Dim dt As DataTable = helper.ExecuteQuery(query, parameters)
+            dt.TableName = "Doctores"
+            Return dt
+        Catch ex As Exception
+            ' En caso de error, puedes registrar/loguear
+            Return Nothing
+        End Try
+    End Function
+
+
 End Class
 
 

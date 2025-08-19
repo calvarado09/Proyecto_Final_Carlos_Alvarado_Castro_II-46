@@ -97,6 +97,10 @@
             <asp:FileUpload ID="fuFoto" runat="server" CssClass="form-control-file" />
         </div>
 
+        <div class="form-group text-center">
+            <asp:Image ID="imgDoctor" runat="server" Width="150px" Height="150px" Visible="False" CssClass="mb-3 rounded" />
+        </div>
+
 
         <div class="btn-group-custom">
             <asp:Button CssClass="btn btn-success py-2 w-50" ID="btnGuardar" runat="server" Text="Guardar Doctor" OnClick="btnGuardar_Click" />
@@ -132,9 +136,12 @@
         <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
         <asp:BoundField DataField="Email" HeaderText="Email" />
         <asp:BoundField DataField="Cedula" HeaderText="Cédula" />
-
-        <asp:ImageField DataImageUrlField="Foto" HeaderText="Foto" 
-            ControlStyle-Width="80px" ControlStyle-Height="80px" />
+        <asp:TemplateField HeaderText="Foto">
+    <ItemTemplate>
+        <asp:Image ID="imgGridFoto" runat="server" Width="50px" Height="50px"
+            ImageUrl='<%# Eval("Foto") %>' CssClass="rounded-circle" />
+    </ItemTemplate>
+</asp:TemplateField>
         
         <asp:CommandField ShowDeleteButton="True" />
     </Columns>
