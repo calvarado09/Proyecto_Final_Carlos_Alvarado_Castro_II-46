@@ -29,7 +29,7 @@
 
 
     Protected Sub btnLimpiar_Click(sender As Object, e As EventArgs)
-
+        LimpiarFormulario() 'Llama al metodo para limpiar el formulario
     End Sub
 
     Protected Sub gvDoctores_SelectedIndexChanged(sender As Object, e As EventArgs)

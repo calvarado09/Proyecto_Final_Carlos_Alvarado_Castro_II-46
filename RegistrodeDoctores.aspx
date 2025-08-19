@@ -111,43 +111,65 @@
     </div>
 
     <div class="d-flex justify-content-center mt-5">
-    <div style="width: 95%;">
-        <h3 class="text-center mb-3">Lista de Pacientes</h3>
+    <div class="mi-gridview-container">
+        <h3 class="text-center mb-3">Lista de Doctores</h3>
 
         <asp:GridView ID="gvDoctores" runat="server" AutoGenerateColumns="False" 
-    DataKeyNames="DoctorID"
-    OnSelectedIndexChanged="gvDoctores_SelectedIndexChanged"
-    OnRowDeleting="gvDoctores_RowDeleting"
-    CssClass="mi-gridview"
-    HeaderStyle-BackColor="#007bff" HeaderStyle-ForeColor="white"
-    RowStyle-BackColor="#e7f1f4" RowStyle-ForeColor="#000000"
-    AlternatingRowStyle-BackColor="#bdd3f1" AlternatingRowStyle-ForeColor="#000000"
-    GridLines="None"
-    Width="100%">
+            DataKeyNames="DoctorID"
+            OnSelectedIndexChanged="gvDoctores_SelectedIndexChanged"
+            OnRowDeleting="gvDoctores_RowDeleting"
+            CssClass="mi-gridview"
+            HeaderStyle-BackColor="#007bff" HeaderStyle-ForeColor="white"
+            RowStyle-BackColor="#e7f1f4" RowStyle-ForeColor="#000000"
+            AlternatingRowStyle-BackColor="#bdd3f1" AlternatingRowStyle-ForeColor="#000000"
+            GridLines="None">
 
-    <Columns>
-        <asp:CommandField ShowSelectButton="True" />
-        <asp:BoundField DataField="DoctorID" HeaderText="ID" ReadOnly="True" />
-        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-        <asp:BoundField DataField="Apellido1" HeaderText="Apellido1" />
-        <asp:BoundField DataField="Apellido2" HeaderText="Apellido2" />
-        <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
-        <asp:BoundField DataField="CodigoColegiado" HeaderText="Código" />
-        <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
-        <asp:BoundField DataField="Email" HeaderText="Email" />
-        <asp:BoundField DataField="Cedula" HeaderText="Cédula" />
-        <asp:TemplateField HeaderText="Foto">
-    <ItemTemplate>
-        <asp:Image ID="imgGridFoto" runat="server" Width="50px" Height="50px"
-            ImageUrl='<%# Eval("Foto") %>' CssClass="rounded-circle" />
-    </ItemTemplate>
-</asp:TemplateField>
-        
-        <asp:CommandField ShowDeleteButton="True" />
-    </Columns>
-</asp:GridView>
+            <Columns>
+                <asp:CommandField ShowSelectButton="True" />
+                <asp:BoundField DataField="DoctorID" HeaderText="ID" ReadOnly="True" />
+                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                <asp:BoundField DataField="Apellido1" HeaderText="Apellido1" />
+                <asp:BoundField DataField="Apellido2" HeaderText="Apellido2" />
+                <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
+                <asp:BoundField DataField="CodigoColegiado" HeaderText="Código" />
+                <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
+                <asp:BoundField DataField="Email" HeaderText="Email" />
+                <asp:BoundField DataField="Cedula" HeaderText="Cédula" />
 
+                <asp:TemplateField HeaderText="Foto">
+                    <ItemTemplate>
+                        <asp:Image ID="imgGridFoto" runat="server" Width="50px" Height="50px"
+                            ImageUrl='<%# Eval("Foto") %>' CssClass="rounded-circle" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:CommandField ShowDeleteButton="True" />
+            </Columns>
+        </asp:GridView>
+    </div>
 </div>
+
+<style>
+.mi-gridview-container {
+    width: 95%;
+    margin: 0 auto;
+    overflow-x: auto; /* scroll horizontal si es necesario */
+}
+
+.mi-gridview {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    table-layout: fixed; /* columnas distribuidas uniformemente */
+    width: 100%;
+}
+
+.mi-gridview th, .mi-gridview td {
+    text-align: center;
+    word-wrap: break-word;
+}
+</style>
+
 
 <style>
 .mi-gridview {
