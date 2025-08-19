@@ -46,10 +46,10 @@
         }
     </style>
 
-    <asp:HiddenField ID="IdPaciente" runat="server" />
+    <asp:HiddenField ID="IdDoctor" runat="server" />
 
     <div class="card-custom">
-        <h2 class="text-center text-primary mb-4">Registro de Pacientes</h2>
+        <h2 class="text-center text-primary mb-4">Registro de Doctores</h2>
 
         <div class="form-group">
             <label for="txtCedula">Cédula</label>
@@ -72,17 +72,13 @@
         </div>
 
         <div class="form-group">
-            <label for="txtFechaNacimiento">Fecha de Nacimiento</label>
-            <asp:TextBox ID="txtFechaNacimiento" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+            <label for="txtEspecialidad">Especialidad</label>
+            <asp:TextBox ID="txtEspecialidad" runat="server" CssClass="form-control"></asp:TextBox>
         </div>
 
         <div class="form-group">
-            <label for="ddlGenero">Género</label>
-            <asp:DropDownList ID="ddlGenero" runat="server" CssClass="form-control">
-                <asp:ListItem Text="Seleccione..." Value="" />
-                <asp:ListItem Text="Masculino" Value="M" />
-                <asp:ListItem Text="Femenino" Value="F" />
-            </asp:DropDownList>
+            <label for="txtCodigo">Código de colegiado </label>
+            <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control"></asp:TextBox>
         </div>
 
         <div class="form-group">
@@ -95,8 +91,15 @@
             <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
         </div>
 
+
+        <div class="form-group w-75 mx-auto mb-3">
+            <label for="fuFoto">Foto del Doctor</label>
+            <asp:FileUpload ID="fuFoto" runat="server" CssClass="form-control-file" />
+        </div>
+
+
         <div class="btn-group-custom">
-            <asp:Button CssClass="btn btn-success py-2 w-50" ID="btnGuardar" runat="server" Text="Guardar Paciente" OnClick="btnGuardar_Click" />
+            <asp:Button CssClass="btn btn-success py-2 w-50" ID="btnGuardar" runat="server" Text="Guardar Doctor" OnClick="btnGuardar_Click" />
             <asp:Button CssClass="btn btn-danger py-2 w-50" ID="btnLimpiar" runat="server" Text="Cancelar" OnClick="btnLimpiar_Click" />
         </div>
 
@@ -107,32 +110,36 @@
     <div style="width: 95%;">
         <h3 class="text-center mb-3">Lista de Pacientes</h3>
 
-        <asp:GridView ID="gvPacientes" runat="server" AutoGenerateColumns="False" 
-            DataKeyNames="PacienteID"
-            OnSelectedIndexChanged="gvPacientes_SelectedIndexChanged"
-            OnRowDeleting="gvPacientes_RowDeleting"
-            CssClass="mi-gridview"
-            HeaderStyle-BackColor="#007bff" HeaderStyle-ForeColor="white"
-            RowStyle-BackColor="#e7f1f4" RowStyle-ForeColor="#000000"
-            AlternatingRowStyle-BackColor="#bdd3f1" AlternatingRowStyle-ForeColor="#000000"
-            GridLines="None"
-            Width="100%">
+        <asp:GridView ID="gvDoctores" runat="server" AutoGenerateColumns="False" 
+    DataKeyNames="DoctorID"
+    OnSelectedIndexChanged="gvDoctores_SelectedIndexChanged"
+    OnRowDeleting="gvDoctores_RowDeleting"
+    CssClass="mi-gridview"
+    HeaderStyle-BackColor="#007bff" HeaderStyle-ForeColor="white"
+    RowStyle-BackColor="#e7f1f4" RowStyle-ForeColor="#000000"
+    AlternatingRowStyle-BackColor="#bdd3f1" AlternatingRowStyle-ForeColor="#000000"
+    GridLines="None"
+    Width="100%">
 
-            <Columns>
-                <asp:CommandField ShowSelectButton="True" />
-                <asp:BoundField DataField="PacienteID" HeaderText="ID" ReadOnly="True" />
-                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                <asp:BoundField DataField="Apellido1" HeaderText="Apellido1" />
-                <asp:BoundField DataField="Apellido2" HeaderText="Apellido2" />
-                <asp:BoundField DataField="FechaNacimiento" HeaderText="Fecha Nacimiento" DataFormatString="{0:yyyy-MM-dd}" />
-                <asp:BoundField DataField="Genero" HeaderText="Género" />
-                <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
-                <asp:BoundField DataField="Email" HeaderText="Email" />
-                <asp:BoundField DataField="Cedula" HeaderText="Cédula" />
-                <asp:CommandField ShowDeleteButton="True" />
-            </Columns>
-        </asp:GridView>
-    </div>
+    <Columns>
+        <asp:CommandField ShowSelectButton="True" />
+        <asp:BoundField DataField="DoctorID" HeaderText="ID" ReadOnly="True" />
+        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+        <asp:BoundField DataField="Apellido1" HeaderText="Apellido1" />
+        <asp:BoundField DataField="Apellido2" HeaderText="Apellido2" />
+        <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
+        <asp:BoundField DataField="CodigoColegiado" HeaderText="Código" />
+        <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
+        <asp:BoundField DataField="Email" HeaderText="Email" />
+        <asp:BoundField DataField="Cedula" HeaderText="Cédula" />
+
+        <asp:ImageField DataImageUrlField="Foto" HeaderText="Foto" 
+            ControlStyle-Width="80px" ControlStyle-Height="80px" />
+        
+        <asp:CommandField ShowDeleteButton="True" />
+    </Columns>
+</asp:GridView>
+
 </div>
 
 <style>

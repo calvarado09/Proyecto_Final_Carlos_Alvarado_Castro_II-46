@@ -3,6 +3,7 @@
     Private _DoctorID As Integer
     Private _Especialidad As String
     Private _CodigoColegiado As String
+    Private _Foto As String
 
     Public Property DoctorID As Integer
         Get
@@ -28,6 +29,15 @@
         End Get
         Set(value As String)
             _Especialidad = value
+        End Set
+    End Property
+
+    Public Property Foto As String
+        Get
+            Return _Foto
+        End Get
+        Set(value As String)
+            _Foto = value
         End Set
     End Property
 

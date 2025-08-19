@@ -14,13 +14,13 @@ Option Explicit On
 Partial Public Class RegistrodeDoctores
 
     '''<summary>
-    '''Control IdPaciente.
+    '''Control IdDoctor.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents IdPaciente As Global.System.Web.UI.WebControls.HiddenField
+    Protected WithEvents IdDoctor As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
     '''Control txtCedula.
@@ -59,22 +59,22 @@ Partial Public Class RegistrodeDoctores
     Protected WithEvents txtApellido2 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control txtFechaNacimiento.
+    '''Control txtEspecialidad.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtFechaNacimiento As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtEspecialidad As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control ddlGenero.
+    '''Control txtCodigo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents ddlGenero As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents txtCodigo As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Control txtTelefono.
@@ -93,6 +93,15 @@ Partial Public Class RegistrodeDoctores
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control fuFoto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents fuFoto As Global.System.Web.UI.WebControls.FileUpload
 
     '''<summary>
     '''Control btnGuardar.
@@ -122,11 +131,11 @@ Partial Public Class RegistrodeDoctores
     Protected WithEvents lblMensaje As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control gvPacientes.
+    '''Control gvDoctores.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents gvPacientes As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents gvDoctores As Global.System.Web.UI.WebControls.GridView
 End Class
