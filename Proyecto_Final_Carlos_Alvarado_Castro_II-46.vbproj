@@ -144,6 +144,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="DoctoresPublico.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="RegistrodeDoctores.aspx" />
@@ -232,6 +233,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DoctoresPublico.aspx.designer.vb">
+      <DependentUpon>DoctoresPublico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DoctoresPublico.aspx.vb">
+      <DependentUpon>DoctoresPublico.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
