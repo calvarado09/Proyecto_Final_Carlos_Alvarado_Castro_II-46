@@ -135,6 +135,19 @@ Public Class DatabaseHelper
             LogErrorToFile(fullMessage)
         End Try
     End Sub
+
+    Public Function ExecuteScalar(query As String, Optional parameters As List(Of SqlParameter) = Nothing) As Object
+        Using conn As New SqlConnection(connectionString)
+            Using cmd As New SqlCommand(query, conn)
+                If parameters IsNot Nothing Then
+                    cmd.Parameters.AddRange(parameters.ToArray())
+                End If
+                conn.Open()
+                Return cmd.ExecuteScalar()
+            End Using
+        End Using
+    End Function
+
     Public Function CreateParameter(name As String, value As Object) As SqlParameter
         Return New SqlParameter(name, If(value IsNot Nothing, value, DBNull.Value))
     End Function

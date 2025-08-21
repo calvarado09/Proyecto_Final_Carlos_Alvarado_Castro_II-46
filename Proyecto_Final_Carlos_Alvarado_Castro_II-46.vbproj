@@ -149,6 +149,7 @@
     <Content Include="Global.asax" />
     <Content Include="RegistrodeDoctores.aspx" />
     <Content Include="RegistrodePacientes.aspx" />
+    <Content Include="RegistrodePacientesPublico.aspx" />
     <Content Include="ReservarCita.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -229,6 +230,7 @@
     <Compile Include="Data\DatabaseHelper.vb" />
     <Compile Include="Data\DoctorRepository.vb" />
     <Compile Include="Data\PacienteRepository.vb" />
+    <Compile Include="Data\UsuarioRepository.vb" />
     <Compile Include="Default.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
@@ -250,6 +252,7 @@
     <Compile Include="Models\Doctor.vb" />
     <Compile Include="Models\Paciente.vb" />
     <Compile Include="Models\Persona.vb" />
+    <Compile Include="Models\Usuario.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -281,6 +284,13 @@
     </Compile>
     <Compile Include="RegistrodePacientes.aspx.vb">
       <DependentUpon>RegistrodePacientes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="RegistrodePacientesPublico.aspx.designer.vb">
+      <DependentUpon>RegistrodePacientesPublico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrodePacientesPublico.aspx.vb">
+      <DependentUpon>RegistrodePacientesPublico.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ReservarCita.aspx.designer.vb">
