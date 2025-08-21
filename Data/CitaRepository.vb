@@ -75,4 +75,24 @@ Public Class CitaRepository
         Return horas
     End Function
 
+
+    Public Function ObtenerCitasPorDoctor(doctorId As Integer) As DataTable
+        Try
+            Dim query As String = "SELECT c.Fecha, c.Hora, p.Nombre + ' ' + p.Apellido1 + ' ' + p.Apellido2 AS PacienteNombre " &
+                                  "FROM Citas c " &
+                                  "INNER JOIN Pacientes p ON c.PacienteID = p.PacienteID " &
+                                  "WHERE c.DoctorID = @DoctorID " &
+                                  "ORDER BY c.Fecha, c.Hora"
+
+            Dim parametros As New List(Of SqlParameter) From {
+                New SqlParameter("@DoctorID", doctorId)
+            }
+
+            Dim helper As New DatabaseHelper()
+            Return helper.ExecuteQuery(query, parametros)
+        Catch ex As Exception
+            Throw New Exception("Error al obtener citas por doctor: " & ex.Message)
+        End Try
+    End Function
+
 End Class

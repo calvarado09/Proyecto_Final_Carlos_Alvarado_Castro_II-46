@@ -38,7 +38,8 @@ Public Class UsuarioRepository
                 .Usuario = row("Usuario").ToString(),
                 .Contraseña = row("Contraseña").ToString(),
                 .Rol = row("Rol").ToString(),
-                .PacienteID = Convert.ToInt32(row("PacienteID"))
+                .PacienteID = If(IsDBNull(row("PacienteID")), Nothing, Convert.ToInt32(row("PacienteID"))),
+                .DoctorID = If(IsDBNull(row("DoctorID")), Nothing, Convert.ToInt32(row("DoctorID")))
             }
             Return user
         End If

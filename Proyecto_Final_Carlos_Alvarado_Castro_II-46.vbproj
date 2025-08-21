@@ -146,6 +146,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="DoctoresPublico.aspx" />
+    <Content Include="DoctorPanel.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
@@ -252,6 +253,13 @@
     </Compile>
     <Compile Include="DoctoresPublico.aspx.vb">
       <DependentUpon>DoctoresPublico.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="DoctorPanel.aspx.designer.vb">
+      <DependentUpon>DoctorPanel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DoctorPanel.aspx.vb">
+      <DependentUpon>DoctorPanel.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Global.asax.vb">

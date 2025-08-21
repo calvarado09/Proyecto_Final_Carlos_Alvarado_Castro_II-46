@@ -12,16 +12,21 @@
             Dim usuario As Usuario = usuarioRepo.ValidarLogin(txtUsuario.Text.Trim(), txtPassword.Text.Trim())
 
             If usuario IsNot Nothing Then
-                ' Guardar datos en Session
+                'guardar datos en Session
                 Session("UsuarioID") = usuario.UsuarioID
                 Session("Rol") = usuario.Rol
                 Session("PacienteID") = usuario.PacienteID
+                Session("DoctorID") = usuario.DoctorID
 
-                ' Redireccionar según rol
+
                 If usuario.Rol = "Admin" Then
                     Response.Redirect("AdminPanel.aspx")
-                Else
+                ElseIf usuario.Rol = "Paciente" Then
                     Response.Redirect("DoctoresPublico.aspx")
+                ElseIf usuario.Rol = "Doctor" Then
+                    Response.Redirect("DoctorPanel.aspx")
+                Else
+                    lblMensaje.Text = "Rol no reconocido."
                 End If
             Else
                 lblMensaje.Text = "Usuario o contraseña incorrectos."

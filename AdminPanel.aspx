@@ -58,7 +58,7 @@
             <p>Crear nuevo paciente y usuario</p>
         </a>
 
-        <a href="RegistroDoctores.aspx" class="admin-card">
+        <a href="RegistrodeDoctores.aspx" class="admin-card">
             <i class="fas fa-user-md"></i>
             <h3>Registrar Doctor</h3>
             <p>Agregar doctores al sistema</p>
