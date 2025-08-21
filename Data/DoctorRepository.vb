@@ -90,27 +90,34 @@ Public Class DoctorRepository
             dt.TableName = "Doctores"
             Return dt
         Catch ex As Exception
-            ' En caso de error, puedes registrar/loguear
             Return Nothing
         End Try
     End Function
 
 
     Public Function InsertarRetornarId(doctor As Doctor) As Integer
-        Dim query As String = "INSERT INTO Doctores (Nombre, Apellido1, Apellido2, Especialidad, Telefono, Email)
-                           VALUES (@Nombre, @Apellido1, @Apellido2, @Especialidad, @Telefono, @Email);
-                           SELECT CAST(SCOPE_IDENTITY() AS INT);"
-        Dim parametros As New List(Of SqlParameter) From {
+    Dim query As String = "
+        INSERT INTO Doctores (Nombre, Apellido1, Apellido2, Cedula, Especialidad, CodigoColegiado, Telefono, Email, Foto)
+        VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @Especialidad, @CodigoColegiado, @Telefono, @Email, @Foto);
+        SELECT CAST(SCOPE_IDENTITY() AS INT);
+    "
+
+    Dim parametros As New List(Of SqlParameter) From {
         New SqlParameter("@Nombre", doctor.Nombre),
         New SqlParameter("@Apellido1", doctor.Apellido1),
         New SqlParameter("@Apellido2", doctor.Apellido2),
+        New SqlParameter("@Cedula", doctor.Cedula),
         New SqlParameter("@Especialidad", doctor.Especialidad),
+        New SqlParameter("@CodigoColegiado", doctor.CodigoColegiado),
         New SqlParameter("@Telefono", doctor.Telefono),
-        New SqlParameter("@Email", doctor.Email)
+        New SqlParameter("@Email", doctor.Email),
+        New SqlParameter("@Foto", If(doctor.Foto, DBNull.Value))
     }
-        Dim helper As New DatabaseHelper()
-        Return helper.ExecuteScalar(query, parametros)
-    End Function
+
+    Dim helper As New DatabaseHelper()
+    Return helper.ExecuteScalar(query, parametros)
+End Function
+
 
 
 

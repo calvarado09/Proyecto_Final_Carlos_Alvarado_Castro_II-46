@@ -3,7 +3,8 @@
     Private _Usuario As String
     Private _Contraseña As String
     Private _Rol As String
-    Private _PacienteID As Integer
+    Public Property PacienteID As Integer?  '
+    Public Property DoctorID As Integer?
 
     Public Property UsuarioID As Integer
         Get
@@ -41,12 +42,5 @@
         End Set
     End Property
 
-    Public Property PacienteID As Integer
-        Get
-            Return _PacienteID
-        End Get
-        Set(value As Integer)
-            _PacienteID = value
-        End Set
-    End Property
+
 End Class

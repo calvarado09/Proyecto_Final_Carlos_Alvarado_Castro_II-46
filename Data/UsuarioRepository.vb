@@ -5,19 +5,23 @@ Public Class UsuarioRepository
     Public Function Insertar(usuario As Usuario) As Boolean
         Try
             Dim helper As New DatabaseHelper()
-            Dim query As String = "INSERT INTO Usuarios (Usuario, Contraseña, Rol, PacienteID) " &
-                                  "VALUES (@Usuario, @Contraseña, @Rol, @PacienteID)"
+            Dim query As String = "INSERT INTO Usuarios (Usuario, Contraseña, Rol, PacienteID, DoctorID) " &
+                              "VALUES (@Usuario, @Contraseña, @Rol, @PacienteID, @DoctorID)"
             Dim parametros As New List(Of SqlParameter) From {
-                New SqlParameter("@Usuario", usuario.Usuario),
-                New SqlParameter("@Contraseña", usuario.Contraseña),
-                New SqlParameter("@Rol", usuario.Rol),
-                New SqlParameter("@PacienteID", usuario.PacienteID)
-            }
+            New SqlParameter("@Usuario", usuario.Usuario),
+            New SqlParameter("@Contraseña", usuario.Contraseña),
+            New SqlParameter("@Rol", usuario.Rol),
+            New SqlParameter("@PacienteID", If(usuario.PacienteID.HasValue, usuario.PacienteID, DBNull.Value)),
+            New SqlParameter("@DoctorID", If(usuario.DoctorID.HasValue, usuario.DoctorID, DBNull.Value))
+        }
             Return helper.ExecuteNonQuery(query, parametros)
         Catch ex As Exception
             Throw New Exception("Error al insertar usuario: " & ex.Message)
         End Try
     End Function
+
+
+
 
     Public Function ValidarLogin(usuario As String, contraseña As String) As Usuario
         Dim helper As New DatabaseHelper()
