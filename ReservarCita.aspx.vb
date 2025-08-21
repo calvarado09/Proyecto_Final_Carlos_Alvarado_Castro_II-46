@@ -40,7 +40,7 @@
         Dim repo As New CitaRepository()
         Dim horasOcupadas As List(Of String) = repo.GetHorasOcupadas(doctorId, fecha)
 
-        Dim horasDisponibles As String() = {"08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00"}
+        Dim horasDisponibles As String() = {"08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "15:00"}
         For Each h In horasDisponibles
             If Not horasOcupadas.Contains(h) Then
                 ddlHorasCita.Items.Add(h)
@@ -48,10 +48,20 @@
         Next
     End Sub
 
+
+
     Protected Sub btnConfirmarCita_Click(sender As Object, e As EventArgs)
         Try
+
             If String.IsNullOrWhiteSpace(txtFechaCita.Text) OrElse ddlHorasCita.SelectedIndex = -1 Then
                 lblMensajeCita.Text = "Seleccione fecha y hora."
+                Return
+            End If
+
+
+            Dim pacienteId As Object = Session("PacienteID")
+            If pacienteId Is Nothing OrElse Convert.ToInt32(pacienteId) = 0 Then
+                lblMensajeCita.Text = "Debes iniciar sesión como paciente para reservar una cita."
                 Return
             End If
 
@@ -63,20 +73,37 @@
             }
 
             Dim repo As New CitaRepository()
+
             If repo.Insertar(cita) Then
                 lblMensajeCita.Text = "Cita reservada correctamente."
-                ddlHorasCita.Items.Clear()
+
+
+                Try
+                    ddlHorasCita.Items.Clear()
+                    Dim doctorId As Integer = Convert.ToInt32(hfDoctorID.Value)
+                    Dim fecha As Date = Convert.ToDateTime(txtFechaCita.Text)
+
+                    Dim horasOcupadas As List(Of String) = repo.GetHorasOcupadas(doctorId, fecha)
+                    Dim horasDisponibles As String() = {"08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00"}
+
+                    For Each h In horasDisponibles
+                        If Not horasOcupadas.Contains(h) Then
+                            ddlHorasCita.Items.Add(h)
+                        End If
+                    Next
+                Catch ex As Exception
+                    lblMensajeCita.Text &= " (No se pudieron actualizar las horas: " & ex.Message & ")"
+                End Try
+
+
                 txtFechaCita.Text = ""
             Else
                 lblMensajeCita.Text = "Error al reservar la cita."
             End If
+
         Catch ex As Exception
             lblMensajeCita.Text = "Ocurrió un error: " & ex.Message
         End Try
     End Sub
-
-
-
-
 
 End Class

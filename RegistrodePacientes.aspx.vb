@@ -23,6 +23,8 @@
         txtEmail.Text = String.Empty
         IdPaciente.Value = String.Empty
         lblMensaje.Text = String.Empty
+        txtUsuario.Text = String.Empty
+        txtPassword.Text = String.Empty
     End Sub
 
     Protected Sub gvPacientes_SelectedIndexChanged(sender As Object, e As EventArgs) 'Evento de seleccion en el grid
@@ -60,33 +62,34 @@
 
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
         Try
+            ' Validaciones
             If String.IsNullOrWhiteSpace(txtNombre.Text) OrElse
-           String.IsNullOrWhiteSpace(txtApellido1.Text) OrElse   'Validar que todos los campos esten llenos
+           String.IsNullOrWhiteSpace(txtApellido1.Text) OrElse
            String.IsNullOrWhiteSpace(txtApellido2.Text) OrElse
            String.IsNullOrWhiteSpace(txtFechaNacimiento.Text) OrElse
            ddlGenero.SelectedIndex = 0 OrElse
            String.IsNullOrWhiteSpace(txtEmail.Text) OrElse
            String.IsNullOrWhiteSpace(txtTelefono.Text) OrElse
-           String.IsNullOrWhiteSpace(txtCedula.Text) Then
+           String.IsNullOrWhiteSpace(txtCedula.Text) OrElse
+           String.IsNullOrWhiteSpace(txtUsuario.Text) OrElse
+           String.IsNullOrWhiteSpace(txtPassword.Text) Then
 
-                lblMensaje.Text = "Todos los campos son obligatorios." 'mensaje si hay alguno vacio
+                lblMensaje.Text = "Todos los campos son obligatorios."
                 Return
             End If
 
-            If Not IsNumeric(txtTelefono.Text.Trim()) OrElse
-               Not IsNumeric(txtCedula.Text.Trim()) Then  'Validar que el telefono y la cedula sean solo numeros
-                lblMensaje.Text = "Ingrese solo numeros en el telefono y la cedula."
+            If Not IsNumeric(txtTelefono.Text.Trim()) OrElse Not IsNumeric(txtCedula.Text.Trim()) Then
+                lblMensaje.Text = "Ingrese solo números en el teléfono y la cédula."
                 Return
             End If
 
-            'Comvertir la fecha de nacimiento a aateTime y validar que sea correcta
             Dim fechaNacimiento As DateTime
             If Not DateTime.TryParse(txtFechaNacimiento.Text.Trim(), fechaNacimiento) Then
-                lblMensaje.Text = "Ingrese una fecha valida."
+                lblMensaje.Text = "Ingrese una fecha válida."
                 Return
             End If
 
-            'Crear objeto paciente
+            ' Crear objeto Paciente
             Dim paciente As New Paciente() With {
             .Nombre = txtNombre.Text.Trim(),
             .Apellido1 = txtApellido1.Text.Trim(),
@@ -98,31 +101,47 @@
             .Email = txtEmail.Text.Trim()
         }
 
-            Dim repo As New PacienteRepository() 'Instantiar el repositorio
+            Dim repoPaciente As New PacienteRepository()
+            Dim repoUsuario As New UsuarioRepository()
+
+
             If String.IsNullOrWhiteSpace(IdPaciente.Value) Then
-                Dim exito As Boolean = repo.Insertar(paciente) 'Inesrtar nuevo paciente
-                If exito Then
-                    lblMensaje.Text = "Paciente agregado exitosamente."
-                    LimpiarFormulario()
-                    cargarGridView()
+
+                Dim pacienteId As Integer = repoPaciente.InsertarRetornarId(paciente)
+                If pacienteId > 0 Then
+                    Dim usuario As New Usuario() With {
+                        .Usuario = txtUsuario.Text.Trim(),
+                        .Contraseña = txtPassword.Text.Trim(),
+                        .Rol = "Paciente",
+                        .PacienteID = pacienteId
+    }
+                    Dim exitoUsuario As Boolean = repoUsuario.Insertar(usuario)
+                    If exitoUsuario Then
+                        lblMensaje.Text = "Paciente y usuario agregados exitosamente."
+                        LimpiarFormulario()
+                        cargarGridView()
+                    Else
+                        lblMensaje.Text = "Paciente agregado, pero hubo un error al crear el usuario."
+                    End If
                 Else
-                    lblMensaje.Text = "Error al agregar el paciente"
+                    lblMensaje.Text = "Error al agregar el paciente."
                 End If
             Else
+
                 paciente.PacienteID = Convert.ToInt32(IdPaciente.Value)
-                Dim resultado As Boolean = repo.Actualizar(paciente) 'Actualizar paciente existente con el id
-                If resultado Then
-                    lblMensaje.Text = "Paciente actualizado correctamente"
+                Dim exitoPaciente As Boolean = repoPaciente.Actualizar(paciente)
+                If exitoPaciente Then
+                    lblMensaje.Text = "Paciente actualizado correctamente."
                     LimpiarFormulario()
                     cargarGridView()
-                    IdPaciente.Value = String.Empty 'limpiar el hiddenfield 
+                    IdPaciente.Value = String.Empty
                 Else
-                    lblMensaje.Text = "Error al actualizar el paciente"
+                    lblMensaje.Text = "Error al actualizar el paciente."
                 End If
             End If
 
         Catch ex As Exception
-            lblMensaje.Text = "Ocurrió un error: " & ex.Message 'Mensaje en caso de errores
+            lblMensaje.Text = "Ocurrió un error: " & ex.Message
         End Try
     End Sub
 

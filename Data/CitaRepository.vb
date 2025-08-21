@@ -56,24 +56,23 @@ Public Class CitaRepository
         End Try
     End Function
 
-    ' Obtener horas ocupadas de un doctor en una fecha específica
-    Public Function GetHorasOcupadas(doctorID As Integer, fecha As Date) As List(Of String)
+    ' Obtener horas ocupadas de un doctor en una fecha espesifica
+    Public Function GetHorasOcupadas(doctorId As Integer, fecha As Date) As List(Of String)
         Dim helper As New DatabaseHelper()
-        Dim query As String = "
-            SELECT Hora FROM Citas
-            WHERE DoctorID = @DoctorID AND Fecha = @Fecha"
-        Dim parameters As New List(Of SqlParameter) From {
-            New SqlParameter("@DoctorID", doctorID),
-            New SqlParameter("@Fecha", fecha)
+        Dim horas As New List(Of String)
+
+        Dim query As String = "SELECT Hora FROM Citas WHERE DoctorID = @DoctorID AND CONVERT(date, Fecha) = @Fecha"
+        Dim params As New List(Of SqlParameter) From {
+            New SqlParameter("@DoctorID", doctorId),
+            New SqlParameter("@Fecha", fecha.Date)
         }
 
-        Dim dt As DataTable = helper.ExecuteQuery(query, parameters)
-        Dim horas As New List(Of String)
-        If dt IsNot Nothing Then
-            For Each row As DataRow In dt.Rows
-                horas.Add(row("Hora").ToString())
-            Next
-        End If
+        Dim dt As DataTable = helper.ExecuteQuery(query, params)
+        For Each row As DataRow In dt.Rows
+            horas.Add(TimeSpan.Parse(row("Hora").ToString()).ToString("hh\:mm"))
+        Next
+
         Return horas
     End Function
+
 End Class

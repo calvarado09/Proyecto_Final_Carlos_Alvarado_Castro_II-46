@@ -96,6 +96,24 @@ Public Class DoctorRepository
     End Function
 
 
+    Public Function InsertarRetornarId(doctor As Doctor) As Integer
+        Dim query As String = "INSERT INTO Doctores (Nombre, Apellido1, Apellido2, Especialidad, Telefono, Email)
+                           VALUES (@Nombre, @Apellido1, @Apellido2, @Especialidad, @Telefono, @Email);
+                           SELECT CAST(SCOPE_IDENTITY() AS INT);"
+        Dim parametros As New List(Of SqlParameter) From {
+        New SqlParameter("@Nombre", doctor.Nombre),
+        New SqlParameter("@Apellido1", doctor.Apellido1),
+        New SqlParameter("@Apellido2", doctor.Apellido2),
+        New SqlParameter("@Especialidad", doctor.Especialidad),
+        New SqlParameter("@Telefono", doctor.Telefono),
+        New SqlParameter("@Email", doctor.Email)
+    }
+        Dim helper As New DatabaseHelper()
+        Return helper.ExecuteScalar(query, parametros)
+    End Function
+
+
+
 End Class
 
 

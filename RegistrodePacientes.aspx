@@ -95,12 +95,25 @@
             <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
         </div>
 
+        <asp:Label ID="lblMensaje" runat="server" CssClass="mt-3 d-block"></asp:Label>
+         <hr />
+        <h3 class="text-center">Crear Usuario</h3>
+
+        <div class="form-group">
+            <label>Usuario:</label>
+            <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Contraseña:</label>
+            <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" />
+        </div>
+
         <div class="btn-group-custom">
             <asp:Button CssClass="btn btn-success py-2 w-50" ID="btnGuardar" runat="server" Text="Guardar Paciente" OnClick="btnGuardar_Click" />
             <asp:Button CssClass="btn btn-danger py-2 w-50" ID="btnLimpiar" runat="server" Text="Cancelar" OnClick="btnLimpiar_Click" />
         </div>
 
-        <asp:Label ID="lblMensaje" runat="server" CssClass="mt-3 d-block"></asp:Label>
     </div>
 
     <div class="d-flex justify-content-center mt-5">
