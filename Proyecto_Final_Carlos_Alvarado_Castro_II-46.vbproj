@@ -149,6 +149,7 @@
     <Content Include="Global.asax" />
     <Content Include="RegistrodeDoctores.aspx" />
     <Content Include="RegistrodePacientes.aspx" />
+    <Content Include="ReservarCita.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -224,6 +225,7 @@
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Data\CitaRepository.vb" />
     <Compile Include="Data\DatabaseHelper.vb" />
     <Compile Include="Data\DoctorRepository.vb" />
     <Compile Include="Data\PacienteRepository.vb" />
@@ -279,6 +281,13 @@
     </Compile>
     <Compile Include="RegistrodePacientes.aspx.vb">
       <DependentUpon>RegistrodePacientes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ReservarCita.aspx.designer.vb">
+      <DependentUpon>ReservarCita.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReservarCita.aspx.vb">
+      <DependentUpon>ReservarCita.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Site.Master.designer.vb">

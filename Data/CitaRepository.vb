@@ -1,0 +1,79 @@
+﻿Imports System.Data.SqlClient
+
+Public Class CitaRepository
+    Public Function Insertar(cita As Cita) As Boolean
+        Dim helper As New DatabaseHelper()
+        Dim query As String = "
+            INSERT INTO Citas (PacienteID, DoctorID, Fecha, Hora)
+            VALUES (@PacienteID, @DoctorID, @Fecha, @Hora)"
+        Dim parameters As New List(Of SqlParameter) From {
+            New SqlParameter("@PacienteID", cita.PacienteID),
+            New SqlParameter("@DoctorID", cita.DoctorID),
+            New SqlParameter("@Fecha", cita.Fecha),
+            New SqlParameter("@Hora", cita.Hora)
+        }
+        Return helper.ExecuteNonQuery(query, parameters)
+    End Function
+
+    ' Actualizar cita existente
+    Public Function Actualizar(cita As Cita) As Boolean
+        Dim helper As New DatabaseHelper()
+        Dim query As String =
+            "
+            UPDATE Citas
+            SET PacienteID = @PacienteID, DoctorID = @DoctorID, Fecha = @Fecha, Hora = @Hora
+            WHERE CitaID = @CitaID"
+        Dim parameters As New List(Of SqlParameter) From {
+            New SqlParameter("@PacienteID", cita.PacienteID),
+            New SqlParameter("@DoctorID", cita.DoctorID),
+            New SqlParameter("@Fecha", cita.Fecha),
+            New SqlParameter("@Hora", cita.Hora),
+            New SqlParameter("@CitaID", cita.CitaID)
+        }
+        Return helper.ExecuteNonQuery(query, parameters)
+    End Function
+
+    ' Eliminar cita por ID
+    Public Function Eliminar(citaID As Integer) As Boolean
+        Dim helper As New DatabaseHelper()
+        Dim query As String = "DELETE FROM Citas WHERE CitaID = @CitaID"
+        Dim parameters As New List(Of SqlParameter) From {
+            New SqlParameter("@CitaID", citaID)
+        }
+        Return helper.ExecuteNonQuery(query, parameters)
+    End Function
+
+    ' Listar todas las citas
+    Public Function ReadCitas() As DataTable
+        Dim helper As New DatabaseHelper()
+        Try
+            Dim query As String = "SELECT * FROM Citas"
+            Dim dt As DataTable = helper.ExecuteQuery(query)
+            dt.TableName = "Citas"
+            Return dt
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
+    ' Obtener horas ocupadas de un doctor en una fecha específica
+    Public Function GetHorasOcupadas(doctorID As Integer, fecha As Date) As List(Of String)
+        Dim helper As New DatabaseHelper()
+        Dim query As String = "
+            SELECT Hora FROM Citas
+            WHERE DoctorID = @DoctorID AND Fecha = @Fecha"
+        Dim parameters As New List(Of SqlParameter) From {
+            New SqlParameter("@DoctorID", doctorID),
+            New SqlParameter("@Fecha", fecha)
+        }
+
+        Dim dt As DataTable = helper.ExecuteQuery(query, parameters)
+        Dim horas As New List(Of String)
+        If dt IsNot Nothing Then
+            For Each row As DataRow In dt.Rows
+                horas.Add(row("Hora").ToString())
+            Next
+        End If
+        Return horas
+    End Function
+End Class

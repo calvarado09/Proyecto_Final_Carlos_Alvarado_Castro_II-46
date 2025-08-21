@@ -2,7 +2,8 @@
     Private _CitaID As Integer
     Private _PacienteID As Integer
     Private _DoctorID As Integer
-    Private _FechaHora As DateTime
+    Private _Fecha As Date
+    Private _Hora As String
     Private _Notas As String
     Private _Estado As String
 
@@ -33,12 +34,21 @@
         End Set
     End Property
 
-    Public Property FechaHora As Date
+    Public Property Fecha As Date
         Get
-            Return _FechaHora
+            Return _Fecha
         End Get
         Set(value As Date)
-            _FechaHora = value
+            _Fecha = value
+        End Set
+    End Property
+
+    Public Property Hora As String
+        Get
+            Return _Hora
+        End Get
+        Set(value As String)
+            _Hora = value
         End Set
     End Property
 
