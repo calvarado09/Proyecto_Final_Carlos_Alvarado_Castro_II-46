@@ -55,13 +55,13 @@
         <a href="RegistrodePacientes.aspx" class="admin-card">
             <i class="fas fa-user-plus"></i>
             <h3>Registrar Paciente</h3>
-            <p>Crear nuevo paciente y usuario</p>
+            <p>Crear nuevo paciente y su usuario</p>
         </a>
 
         <a href="RegistrodeDoctores.aspx" class="admin-card">
             <i class="fas fa-user-md"></i>
             <h3>Registrar Doctor</h3>
-            <p>Agregar doctores al sistema</p>
+            <p>Agregar doctores y su usuario</p>
         </a>
 
         <a href="VerCitas.aspx" class="admin-card">
@@ -70,10 +70,10 @@
             <p>Ver y gestionar citas</p>
         </a>
 
-        <a href="ConfiguracionRoles.aspx" class="admin-card">
+        <a href="RegistrarAdmin" class="admin-card">
             <i class="fas fa-cogs"></i>
-            <h3>Roles y Configuración</h3>
-            <p>Administrar permisos</p>
+            <h3>Gestión de Usuarios</h3>
+            <p>Crear usuarios Administrativos</p>
         </a>
     </div>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">

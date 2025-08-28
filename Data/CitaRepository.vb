@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Runtime.Remoting.Messaging
 
 Public Class CitaRepository
     Public Function Insertar(cita As Cita) As Boolean
@@ -61,7 +62,10 @@ Public Class CitaRepository
         Dim helper As New DatabaseHelper()
         Dim horas As New List(Of String)
 
-        Dim query As String = "SELECT Hora FROM Citas WHERE DoctorID = @DoctorID AND CONVERT(date, Fecha) = @Fecha"
+        Dim query As String = "SELECT Hora FROM Citas 
+                           WHERE DoctorID = @DoctorID 
+                             AND CONVERT(date, Fecha) = @Fecha
+                             AND Estado IN ('Pendiente','Confirmada')"
         Dim params As New List(Of SqlParameter) From {
             New SqlParameter("@DoctorID", doctorId),
             New SqlParameter("@Fecha", fecha.Date)
@@ -94,5 +98,62 @@ Public Class CitaRepository
             Throw New Exception("Error al obtener citas por doctor: " & ex.Message)
         End Try
     End Function
+
+    Public Function ObtenerCitasConDetalles() As DataTable
+        Dim helper As New DatabaseHelper()
+        Dim query As String = "
+            SELECT 
+                c.CitaID,
+                p.Nombre + ' ' + p.Apellido1 + ' ' + p.Apellido2 AS Paciente,
+                d.Nombre + ' ' + d.Apellido1 + ' ' + d.Apellido2 AS Doctor,
+                c.Fecha,
+                c.Hora,
+                c.Estado
+            FROM Citas c
+            INNER JOIN Pacientes p ON c.PacienteID = p.PacienteID
+            INNER JOIN Doctores d ON c.DoctorID = d.DoctorID"
+        Return helper.ExecuteQuery(query)
+    End Function
+
+    Public Function CancelarCita(citaID As Integer) As Boolean
+        Try
+            Dim helper As New DatabaseHelper()
+            Dim query As String = "UPDATE Citas SET Estado = 'Cancelada' WHERE CitaID = @CitaID"
+            Dim parametros As New List(Of SqlParameter) From {
+            New SqlParameter("@CitaID", citaID)
+        }
+            Return helper.ExecuteNonQuery(query, parametros)
+        Catch ex As Exception
+            Throw New Exception("Error al cancelar la cita: " & ex.Message)
+        End Try
+    End Function
+
+    ' Elimina todas las citas de un doctor
+    Public Function EliminarCitasPorDoctor(doctorId As Integer) As Boolean
+        Try
+            Dim helper As New DatabaseHelper()
+            Dim query As String = "DELETE FROM Citas WHERE DoctorID = @DoctorID"
+            Dim parameters As New List(Of SqlParameter) From {
+                New SqlParameter("@DoctorID", doctorId)
+            }
+            Return helper.ExecuteNonQuery(query, parameters)
+        Catch ex As Exception
+            Throw New Exception("Error al eliminar citas del doctor: " & ex.Message)
+        End Try
+    End Function
+
+    Public Function EliminarCitasPorPaciente(pacienteId As Integer) As Boolean
+        Try
+            Dim helper As New DatabaseHelper()
+            Dim query As String = "DELETE FROM Citas WHERE PacienteID = @PacienteID"
+            Dim parameters As New List(Of SqlParameter) From {
+                New SqlParameter("@PacienteID", pacienteId)
+            }
+            Return helper.ExecuteNonQuery(query, parameters)
+        Catch ex As Exception
+            Throw New Exception("Error al eliminar citas del paciente: " & ex.Message)
+        End Try
+    End Function
+
 
 End Class

@@ -112,6 +112,8 @@
         <div class="btn-group-custom">
             <asp:Button CssClass="btn btn-success py-2 w-50" ID="btnGuardar" runat="server" Text="Guardar Paciente" OnClick="btnGuardar_Click" />
             <asp:Button CssClass="btn btn-danger py-2 w-50" ID="btnLimpiar" runat="server" Text="Cancelar" OnClick="btnLimpiar_Click" />
+            <asp:Button CssClass="btn btn-primary py-2 w-50" ID="btnVolver" runat="server" Text="Volver" OnClick="btnVolver_Click" />
+
         </div>
 
     </div>

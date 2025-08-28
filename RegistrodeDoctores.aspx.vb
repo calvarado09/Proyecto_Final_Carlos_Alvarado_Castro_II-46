@@ -75,9 +75,7 @@
            String.IsNullOrWhiteSpace(txtTelefono.Text) OrElse
            String.IsNullOrWhiteSpace(txtEmail.Text) OrElse
            String.IsNullOrWhiteSpace(txtCodigo.Text) OrElse
-           String.IsNullOrWhiteSpace(txtUsuario.Text) OrElse
-           String.IsNullOrWhiteSpace(txtPassword.Text) Then
-                lblMensaje.Text = "Todos los campos son obligatorios."
+                lblMensaje.Text = "Todos los campos son obligatorios." Then
                 Return
             End If
 
@@ -127,9 +125,11 @@
                 Dim doctorId As Integer = repoDoctor.InsertarRetornarId(doctor)
                 If doctorId > 0 Then
                     doctor.DoctorID = doctorId
+                    Dim encriptador As New Simple3Des("Clave") ' Clave de encriptasion
+                    Dim claveEncriptada As String = encriptador.EncryptData(txtPassword.Text.Trim()) ' Encriptar la contraseña
                     Dim usuario As New Usuario() With {
                     .Usuario = txtUsuario.Text.Trim(),
-                    .Contraseña = txtPassword.Text.Trim(),
+                    .Contraseña = claveEncriptada,
                     .Rol = "Doctor",
                     .DoctorID = doctorId,
                     .PacienteID = Nothing
@@ -172,7 +172,13 @@
     Protected Sub gvDoctores_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
         Try
             Dim repo As New DoctorRepository() 'se istancia el repositorio
+            Dim repoUsuario As New UsuarioRepository() 'se instancia el repositorio de usuario
+            Dim repoCita As New CitaRepository()
             Dim doctorId As Integer = Convert.ToInt32(gvDoctores.DataKeys(e.RowIndex).Value)
+
+            repoCita.EliminarCitasPorDoctor(doctorId)
+
+            repoUsuario.EliminarPorDoctorID(doctorId) 'Elimina el usuario asociado al doctor antes de eliminar el doctor
 
             Dim exito As Boolean = repo.Eliminar(doctorID) 'Se llama al metodo eliminar del repositorio
             If exito Then
@@ -185,5 +191,9 @@
         Catch ex As Exception
             lblMensaje.Text = "Ocurrio un error al eliminar el doctor: " & ex.Message 'Mensaje por si hay errores
         End Try
+    End Sub
+
+    Protected Sub btnVolver_Click(sender As Object, e As EventArgs)
+        Response.Redirect("AdminPanel.aspx")
     End Sub
 End Class

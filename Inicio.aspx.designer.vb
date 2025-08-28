@@ -11,5 +11,14 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Contact
+Partial Public Class Inicio
+
+    '''<summary>
+    '''Control btnReservar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnReservar As Global.System.Web.UI.WebControls.Button
 End Class

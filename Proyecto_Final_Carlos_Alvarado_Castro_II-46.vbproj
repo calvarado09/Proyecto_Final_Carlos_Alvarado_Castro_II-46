@@ -149,7 +149,10 @@
     <Content Include="DoctorPanel.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Inicio.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="PerfilPaciente.aspx" />
+    <Content Include="RegistrarAdmin.aspx" />
     <Content Include="RegistrodeDoctores.aspx" />
     <Content Include="RegistrodePacientes.aspx" />
     <Content Include="RegistrodePacientesPublico.aspx" />
@@ -209,6 +212,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="VerCitas.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
   </ItemGroup>
@@ -265,6 +269,13 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Inicio.aspx.designer.vb">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inicio.aspx.vb">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Login.aspx.designer.vb">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
@@ -296,6 +307,20 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="PerfilPaciente.aspx.designer.vb">
+      <DependentUpon>PerfilPaciente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PerfilPaciente.aspx.vb">
+      <DependentUpon>PerfilPaciente.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="RegistrarAdmin.aspx.designer.vb">
+      <DependentUpon>RegistrarAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrarAdmin.aspx.vb">
+      <DependentUpon>RegistrarAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="RegistrodeDoctores.aspx.designer.vb">
       <DependentUpon>RegistrodeDoctores.aspx</DependentUpon>
     </Compile>
@@ -308,7 +333,7 @@
     </Compile>
     <Compile Include="RegistrodePacientes.aspx.vb">
       <DependentUpon>RegistrodePacientes.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="RegistrodePacientesPublico.aspx.designer.vb">
       <DependentUpon>RegistrodePacientesPublico.aspx</DependentUpon>
@@ -324,12 +349,20 @@
       <DependentUpon>ReservarCita.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Security\Simple3Des.vb" />
     <Compile Include="Site.Master.designer.vb">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.vb">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VerCitas.aspx.designer.vb">
+      <DependentUpon>VerCitas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VerCitas.aspx.vb">
+      <DependentUpon>VerCitas.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.vb">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

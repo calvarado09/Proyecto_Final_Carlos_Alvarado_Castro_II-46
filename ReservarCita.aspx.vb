@@ -24,9 +24,12 @@
             Dim row = dt.Rows(0)
             imgDoctor.ImageUrl = ResolveUrl(row("Foto").ToString())
             lblNombreDoctor.InnerText = row("Nombre").ToString()
+            lblApellidos.InnerText = row("Apellido1").ToString() & " " & row("Apellido2").ToString()
+            lblCodigoDoctor.InnerText = "Código: " & row("CodigoColegiado").ToString()
             lblEspecialidadDoctor.InnerText = "Especialidad: " & row("Especialidad").ToString()
         End If
     End Sub
+
 
 
 
@@ -106,4 +109,7 @@
         End Try
     End Sub
 
+    Protected Sub btnVolver_Click(sender As Object, e As EventArgs)
+        Response.Redirect("DoctoresPublico.aspx")
+    End Sub
 End Class

@@ -46,5 +46,45 @@ Public Class UsuarioRepository
         Return Nothing
     End Function
 
+    Public Function ObtenerUsuariosConRelaciones() As DataTable
+        Dim query As String = "
+        SELECT u.UsuarioID, u.Usuario, u.Rol,
+               p.Nombre + ' ' + p.Apellido1 + ' ' + p.Apellido2 AS PacienteNombre,
+               d.Nombre + ' ' + d.Apellido1 + ' ' + d.Apellido2 AS DoctorNombre
+        FROM Usuarios u
+        LEFT JOIN Pacientes p ON u.PacienteID = p.PacienteID
+        LEFT JOIN Doctores d ON u.DoctorID = d.DoctorID
+        ORDER BY u.UsuarioID DESC"
+        Dim helper As New DatabaseHelper()
+        Return helper.ExecuteQuery(query)
+    End Function
+
+    Public Function EliminarUsuario(usuarioId As Integer) As Boolean
+        Dim helper As New DatabaseHelper()
+        Dim query As String = "DELETE FROM Usuarios WHERE UsuarioID = @UsuarioID"
+        Dim parameters As New List(Of SqlParameter) From {
+        New SqlParameter("@UsuarioID", usuarioId)
+    }
+        Return helper.ExecuteNonQuery(query, parameters)
+    End Function
+
+    Public Function EliminarPorDoctorID(doctorID As Integer) As Boolean
+        Dim helper As New DatabaseHelper()
+        Dim query As String = "DELETE FROM Usuarios WHERE DoctorID = @DoctorID"
+        Dim parameters As New List(Of SqlParameter) From {
+        New SqlParameter("@DoctorID", doctorID)
+    }
+        Return helper.ExecuteNonQuery(query, parameters)
+    End Function
+
+    Public Function EliminarPorPacienteID(pacienteID As Integer) As Boolean
+        Dim helper As New DatabaseHelper()
+        Dim query As String = "DELETE FROM Usuarios WHERE PacienteID = @PacienteID"
+        Dim parameters As New List(Of SqlParameter) From {
+        New SqlParameter("@PacienteID", pacienteID)
+    }
+        Return helper.ExecuteNonQuery(query, parameters)
+    End Function
+
 
 End Class

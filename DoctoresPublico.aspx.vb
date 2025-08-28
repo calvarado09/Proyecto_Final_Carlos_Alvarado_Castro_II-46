@@ -9,6 +9,11 @@
     End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Session("UsuarioID") Is Nothing Then
+            Response.Redirect("~/Login.aspx")
+            Return
+        End If
+
         If Not IsPostBack Then
             CargarDoctores()
         End If

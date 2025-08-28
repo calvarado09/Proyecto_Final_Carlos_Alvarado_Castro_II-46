@@ -109,9 +109,11 @@
 
                 Dim pacienteId As Integer = repoPaciente.InsertarRetornarId(paciente)
                 If pacienteId > 0 Then
+                    Dim encriptador As New Simple3Des("Clave") ' Clave de encriptasion
+                    Dim claveEncriptada As String = encriptador.EncryptData(txtPassword.Text.Trim()) ' Encriptar la contraseña
                     Dim usuario As New Usuario() With {
                         .Usuario = txtUsuario.Text.Trim(),
-                        .Contraseña = txtPassword.Text.Trim(),
+                        .Contraseña = claveEncriptada,
                         .Rol = "Paciente",
                         .PacienteID = pacienteId
     }
@@ -149,13 +151,21 @@
     Protected Sub gvPacientes_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
         Try
             Dim repo As New PacienteRepository() 'se istancia el repositorio
+            Dim repoUsuario As New UsuarioRepository()
+            Dim repocitas As New CitaRepository()
             Dim pacienteId As Integer = Convert.ToInt32(gvPacientes.DataKeys(e.RowIndex).Value)
+
+            repocitas.EliminarCitasPorPaciente(pacienteId)
+            repoUsuario.EliminarPorPacienteID(pacienteId) 'Eliminar el usuario asociado al paciente antes de eliminar el paciente
+
+
 
             Dim exito As Boolean = repo.Eliminar(pacienteId) 'Se llama al metodo eliminar del repositorio
             If exito Then
                 lblMensaje.Text = "Paciente eliminado exitosamente."
                 cargarGridView()
                 LimpiarFormulario()
+                Response.Redirect("AdminPanel.aspx")
             Else
                 lblMensaje.Text = "Error al eliminar el paciente"
             End If
@@ -169,7 +179,7 @@
         LimpiarFormulario() 'Llamar al metodo para limpiar el formulario
     End Sub
 
-
-
-
+    Protected Sub btnVolver_Click(sender As Object, e As EventArgs)
+        Response.Redirect("AdminPanel.aspx") 'Redireccionar a la pagina principal del admin
+    End Sub
 End Class

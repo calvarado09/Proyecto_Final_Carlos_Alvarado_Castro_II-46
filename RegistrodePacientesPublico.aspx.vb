@@ -68,10 +68,11 @@
             Dim pacienteId As Integer = repoPac.InsertarRetornarId(paciente)
 
             If pacienteId > 0 Then
-
+                Dim encriptador As New Simple3Des("Clave") ' Clave de encriptasion
+                Dim claveEncriptada As String = encriptador.EncryptData(txtPassword.Text.Trim()) ' Encriptar la contraseña
                 Dim usuario As New Usuario() With {
                 .Usuario = txtUsuario.Text.Trim(),
-                .Contraseña = txtPassword.Text.Trim(),
+                .Contraseña = claveEncriptada,
                 .Rol = "Paciente",
                 .PacienteID = pacienteId
             }
@@ -82,6 +83,7 @@
                 If exitoUsuario Then
                     lblMensaje.Text = "Paciente y usuario registrados correctamente."
                     LimpiarFormulario()
+                    Response.Redirect("Login.aspx")
                 Else
                     lblMensaje.Text = "Paciente registrado, pero ocurrió un error al crear el usuario."
                 End If

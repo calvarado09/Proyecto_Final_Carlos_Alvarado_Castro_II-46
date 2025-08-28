@@ -11,7 +11,25 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Login
+Partial Public Class VerCitas
+
+    '''<summary>
+    '''Control gvCitas.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvCitas As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Control btnVolver.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnVolver As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control lblMensaje.
@@ -21,31 +39,4 @@ Partial Public Class Login
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents lblMensaje As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control txtUsuario.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents txtUsuario As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control txtPassword.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents txtPassword As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control btnLogin.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnLogin As Global.System.Web.UI.WebControls.Button
 End Class

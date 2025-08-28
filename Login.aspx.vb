@@ -8,18 +8,23 @@
     Protected Sub btnLogin_Click(sender As Object, e As EventArgs)
 
         Try
+            Dim encriptador As New Simple3Des("Clave") ' Clave de encriptasion
+            Dim claveEncriptada As String = encriptador.EncryptData(txtPassword.Text.Trim()) ' Encriptar la contraseña
+
+
             Dim usuarioRepo As New UsuarioRepository()
-            Dim usuario As Usuario = usuarioRepo.ValidarLogin(txtUsuario.Text.Trim(), txtPassword.Text.Trim())
+            Dim usuario As Usuario = usuarioRepo.ValidarLogin(txtUsuario.Text.Trim(), claveEncriptada)
 
             If usuario IsNot Nothing Then
                 'guardar datos en Session
+                Session("NombreUsuario") = usuario.Usuario
                 Session("UsuarioID") = usuario.UsuarioID
                 Session("Rol") = usuario.Rol
                 Session("PacienteID") = usuario.PacienteID
                 Session("DoctorID") = usuario.DoctorID
 
 
-                If usuario.Rol = "Admin" Then
+                If usuario.Rol = "Administrador" Then
                     Response.Redirect("AdminPanel.aspx")
                 ElseIf usuario.Rol = "Paciente" Then
                     Response.Redirect("DoctoresPublico.aspx")
