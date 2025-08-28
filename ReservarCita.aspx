@@ -63,10 +63,11 @@
             background: linear-gradient(90deg, #0056b3, #00408d);
         }
         #lblMensajeCita {
-            margin-top: 15px;
+            margin-top: 20px;
             display: block;
             text-align: center;
             font-weight: bold;
+            color: #007ACC;
         }
     </style>
 

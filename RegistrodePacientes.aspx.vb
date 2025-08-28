@@ -70,9 +70,7 @@
            ddlGenero.SelectedIndex = 0 OrElse
            String.IsNullOrWhiteSpace(txtEmail.Text) OrElse
            String.IsNullOrWhiteSpace(txtTelefono.Text) OrElse
-           String.IsNullOrWhiteSpace(txtCedula.Text) OrElse
-           String.IsNullOrWhiteSpace(txtUsuario.Text) OrElse
-           String.IsNullOrWhiteSpace(txtPassword.Text) Then
+           String.IsNullOrWhiteSpace(txtCedula.Text) Then
 
                 lblMensaje.Text = "Todos los campos son obligatorios."
                 Return
@@ -165,7 +163,7 @@
                 lblMensaje.Text = "Paciente eliminado exitosamente."
                 cargarGridView()
                 LimpiarFormulario()
-                Response.Redirect("AdminPanel.aspx")
+
             Else
                 lblMensaje.Text = "Error al eliminar el paciente"
             End If

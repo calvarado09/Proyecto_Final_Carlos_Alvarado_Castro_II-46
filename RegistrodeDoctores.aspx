@@ -169,14 +169,14 @@
 .mi-gridview-container {
     width: 95%;
     margin: 0 auto;
-    overflow-x: auto; /* scroll horizontal si es necesario */
+    overflow-x: auto; 
 }
 
 .mi-gridview {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    table-layout: fixed; /* columnas distribuidas uniformemente */
+    table-layout: fixed; 
     width: 100%;
 }
 
