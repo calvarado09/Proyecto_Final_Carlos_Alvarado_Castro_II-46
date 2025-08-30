@@ -39,7 +39,7 @@
         If index >= 0 Then
             Dim row As GridViewRow = gvDoctores.Rows(index)
 
-            ' Leer los campos de texto como antes
+            
             txtNombre.Text = row.Cells(2).Text
             txtApellido1.Text = row.Cells(3).Text
             txtApellido2.Text = row.Cells(4).Text
@@ -49,7 +49,7 @@
             txtEmail.Text = row.Cells(8).Text
             txtCedula.Text = row.Cells(9).Text
 
-            ' Leer la foto desde el control Image dentro de la TemplateField
+            
             Dim img As Image = CType(row.FindControl("imgGridFoto"), Image)
             If img IsNot Nothing Then
                 imgDoctor.ImageUrl = img.ImageUrl
